@@ -12,32 +12,32 @@ FileCreateDir, %A_Data%
 IfNotExist, %A_ScriptDir%\API.dll
 {
 TrayTip, Staatsfraktionskeybinder, Keybinderdatein werden heruntergeladen..., 1, 1
-URLDownloadToFile, https://evc85.pcloud.com/dHZHwcaqVZGDrFeJZZZ9UWav7Z2ZZotRZkZxHz5ZPTznChmrgNJ2uA0qEHnyGjzarkvX/API.dll, %A_ScriptDir%\API.dll
+URLDownloadToFile, https://github.com/tokenspins/Staatsfrak-release/raw/main/Files/API.dll, %A_ScriptDir%\API.dll
 }
 IfNotExist, %A_ScriptDir%\Gametext.dll
 {
 TrayTip, Staatsfraktionskeybinder, Keybinderdatein werden heruntergeladen..., 1, 1
-URLDownloadToFile https://www.dropbox.com/s/t3q6lqufprf8ull/Gametext.dll?dl=1, %A_ScriptDir%\Gametext.dll
+URLDownloadToFile https://github.com/tokenspins/Staatsfrak-release/raw/main/Files/Gametext.dll, %A_ScriptDir%\Gametext.dll
 }
 IfNotExist, %A_Data%\trenn1.png
 {
 TrayTip, Staatsfraktionskeybinder, Keybinderdatein werden heruntergeladen..., 1, 1
-URLDownloadToFile https://www.dropbox.com/s/1v5x8u529t7m042/trenn1.png?dl=1, %A_Data%\trenn1.png
+URLDownloadToFile https://github.com/tokenspins/Staatsfrak-release/raw/main/Files/trenn1.png, %A_Data%\trenn1.png
 }
 IfNotExist, %A_Data%\trenn2.png
 {
 TrayTip, Staatsfraktionskeybinder, Keybinderdatein werden heruntergeladen..., 1, 1
-URLDownloadToFile https://www.dropbox.com/s/a5n5ew3dodvn3gj/trenn2.png?dl=1, %A_Data%\trenn2.png
+URLDownloadToFile https://github.com/tokenspins/Staatsfrak-release/raw/main/Files/trenn2.png, %A_Data%\trenn2.png
 }
 IfNotExist, %A_Data%\Army-personnel-icon.png
 {
 TrayTip, Staatsfraktionskeybinder, Keybinderdatein werden heruntergeladen..., 1, 1
-URLDownloadToFile https://www.dropbox.com/s/mobwbb4qopejrp3/Army-personnel-icon.png?dl=1, %A_Data%\Army-personnel-icon.png
+URLDownloadToFile https://github.com/tokenspins/Staatsfrak-release/raw/main/Files/Army-personnel-icon.png, %A_Data%\Army-personnel-icon.png
 }
 IfNotExist, %A_Data%\Police-Officer-icon.png
 {
 TrayTip, Staatsfraktionskeybinder, Keybinderdatein werden heruntergeladen..., 1, 1
-URLDownloadToFile https://www.dropbox.com/s/tebjn8em1eypygx/Police-Officer-icon.png?dl=1, %A_Data%\Police-Officer-icon.png
+URLDownloadToFile https://github.com/tokenspins/Staatsfrak-release/raw/main/Files/Police-Officer-icon.png, %A_Data%\Police-Officer-icon.png
 }
 global ERROR_OK                     := 0
 global ERROR_PROCESS_NOT_FOUND      := 1
