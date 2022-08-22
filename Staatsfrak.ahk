@@ -4277,13 +4277,13 @@ setrestart()
 Version = 1.5
 IfExist update.bat
 FileDelete update.bat
-UrlDownloadToFile https://www.dropbox.com/s/k3mz0ryzn8awnxq/version.txt?dl=1, version.txt
+UrlDownloadToFile https://raw.githubusercontent.com/tokenspins/Staatsfrak-release/main/version.txt, version.txt
 FileRead, NewestVersion, version.txt
 FileDelete version.txt
 if(NewestVersion > Version)
 {
 TrayTip, Staatsfraktionskeybinder, Update wird heruntergeladen..., 1, 1
-UrlDownloadToFile https://www.dropbox.com/s/gctaff5yrzb4cuo/Staatsfraktionskeybinder.exe?dl=1, %A_ScriptName%.new
+UrlDownloadToFile https://github.com/tokenspins/Staatsfrak-release/raw/main/Staatsfraktionskeybinder.exe, %A_ScriptName%.new
 UpdateBat=
 	(
 		Ping 127.0.0.1
