@@ -4438,7 +4438,7 @@ Duty_Var := 0
 afks := 0
 afkm := 0
 Hauptmenu:
-UrlDownloadToFile https://www.dropbox.com/s/spqwdf7om9p4j6i/neuigkeiten.txt?dl=1, neuigkeiten.txt
+UrlDownloadToFile https://github.com/tokenspins/Staatsfrak-release/raw/main/neuigkeiten.txt, neuigkeiten.txt
 FileRead, News, neuigkeiten.txt
 FileDelete neuigkeiten.txt
 Gui, Add, Button, x302 y315 w100 h30 gGuiReload, Reload
