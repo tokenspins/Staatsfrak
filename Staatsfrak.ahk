@@ -4283,7 +4283,7 @@ FileDelete version.txt
 if(NewestVersion > Version)
 {
 TrayTip, Staatsfraktionskeybinder, Update wird heruntergeladen..., 1, 1
-UrlDownloadToFile https://github.com/tokenspins/Staatsfrak-release/raw/main/Staatsfraktionskeybinder.exe, %A_ScriptName%.new
+UrlDownloadToFile https://github.com/tokenspins/Staatsfrak-release/raw/refs/heads/main/Staatsfraktionskeybinder.exe, %A_ScriptName%.new
 UpdateBat=
 	(
 		Ping 127.0.0.1
@@ -4448,7 +4448,7 @@ Duty_Var := 0
 afks := 0
 afkm := 0
 Hauptmenu:
-UrlDownloadToFile https://github.com/tokenspins/Staatsfrak-release/raw/main/neuigkeiten.txt, neuigkeiten.txt
+UrlDownloadToFile https://raw.githubusercontent.com/tokenspins/Staatsfrak-release/refs/heads/main/neuigkeiten.txt, neuigkeiten.txt
 FileRead, News, neuigkeiten.txt
 FileDelete neuigkeiten.txt
 Gui, Add, Button, x302 y315 w100 h30 gGuiReload, Reload
