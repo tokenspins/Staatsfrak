@@ -4274,10 +4274,10 @@ AddChatMessage("Rejoining..")
 Sleep 1000
 setrestart()
 }
-Version = 1.5
+Version = 1.5.1
 IfExist update.bat
 FileDelete update.bat
-UrlDownloadToFile https://raw.githubusercontent.com/tokenspins/Staatsfrak-release/main/version.txt, version.txt
+UrlDownloadToFile https://raw.githubusercontent.com/tokenspins/Staatsfrak-release/refs/heads/main/version.txt, version.txt
 FileRead, NewestVersion, version.txt
 FileDelete version.txt
 if(NewestVersion > Version)
@@ -4300,6 +4300,7 @@ IfNotExist, %ini%
 {
 IniWrite, Keine, %ini%, Einstellungen, Fraktion
 IniWrite, 0, %ini%, Checkboxen, Overlay
+IniWrite, 1, %ini%, Checkboxen, A_Tor
 IniWrite, 1, %ini%, Checkboxen, CheckpointVS
 IniWrite, 1, %ini%, Checkboxen, Chatlog_Pfad_1
 IniWrite, 0, %ini%, Checkboxen, Chatlog_Pfad_2
@@ -4331,6 +4332,7 @@ IniWrite, 10, %ini%, Einstellungen, ABT
 }
 IniRead, Fraktion, %ini%, Einstellungen, Fraktion
 IniRead, Overlay, %ini%, Checkboxen, Overlay
+IniRead, A_Tor, %ini%, Checkboxen, A_Tor
 IniRead, CheckpointVS, %ini%, Checkboxen, CheckpointVS
 IniRead, Chatlog_Pfad_1, %ini%, Checkboxen, Chatlog_Pfad_1
 IniRead, Chatlog_Pfad_2, %ini%, Checkboxen, Chatlog_Pfad_2
@@ -4422,6 +4424,14 @@ ov_move := false
 else
 {
 SetTimer, Overlay, Off
+}
+If(A_Tor == 1)
+{
+SetTimer, Tor, On
+}
+else
+{
+SetTimer, Tor, Off
 }
 SetTimer, ReadChat, 1000
 SetTimer, ReadGameText, 1000
@@ -4684,6 +4694,7 @@ Gui, 4: Add, Text, x12 y124 w100 h20 , Forum - Cookies:
 Gui, 4: Add, Edit, x94 y122 w280 h20 vFCOOK, %FCOOK%
 Gui, 4: Add, GroupBox, x2 y206 w470 h84 cBlack, Keybinder Einstellungen
 Gui, 4: Add, CheckBox, x12 y228 w100 h20 vOverlay checked%Overlay%, Overlay.
+Gui, 4: Add, CheckBox, x182 y228 w280 h20 vA_Tor checked%A_Tor%, Fraktionstore automatisch öffnen
 Gui, 4: Add, CheckBox, x12 y248 w300 h20 vCheckpointVS checked%CheckpointVS%, Checkpoint bei einem VS-Ruf anzeigen lassen.
 Gui, 4: Add, GroupBox, x2 y295 w470 h70 cBlack, AFK-Timer Einstellungen
 Gui, 4: Add, Radio, x12 y312 w170 h20 vAFK_Timer_01 checked%AFK_Timer_01%, AFK-Timer mit Benachrichtigung
@@ -4704,6 +4715,8 @@ IniWrite, %UsID%, %ini%, Einstellungen, UsID
 IniWrite, %FCOOK%, %ini%, Einstellungen, FCOOK
 GuiControlGet, Overlay
 IniWrite, %Overlay%, %ini%, Checkboxen, Overlay
+GuiControlGet, A_Tor
+IniWrite, %A_Tor%, %ini%, Checkboxen, A_Tor
 GuiControlGet, CheckpointVS
 IniWrite, %CheckpointVS%, %ini%, Checkboxen, CheckpointVS
 GuiControlGet, FMSG
@@ -5139,6 +5152,28 @@ else
 afks := 0
 afkm := 0
 }
+}
+return
+Tor:
+if(isPlayerInRangeOfPoint(1588.4491,-1639.5273,13.2729, 14))
+{
+SendChat("/auf")
+Sleep, 3000
+}
+if(isPlayerInRangeOfPoint(1550.3113,-1627.5286,13.3828, 14))
+{
+SendChat("/auf")
+Sleep, 3000
+}
+if(isPlayerInRangeOfPoint(2412.9866,131.0350,27.8623, 5))
+{
+SendChat("/auf")
+Sleep, 3000
+}
+if(isPlayerInRangeOfPoint(1563.8286,-1677.8998,16.2000, 1))
+{
+SendChat("/auf")
+Sleep, 3000
 }
 return
 RSS_Feed:
@@ -5936,7 +5971,7 @@ ShowDialog(0, SFK_C "Regelungen für die Sonderfahrzeuge", "{FFFFFF}§1 Sonderfahr
 return
 :?:/kbefehle::
 Sleep, 300
-ShowDialog(0, SFK_C "Keybinder Befehle", "{FFFFFF} --- Staatsfraktionsbefehle ---`n`n{1E90FF}/att ID {FF0000}= {FFFFFF}Vergibt 4 Wanteds an ID für Attack.`n{1E90FF}/mo ID {FF0000}= {FFFFFF}Vergibt 7 Wanteds an ID für Mord.`n{1E90FF}/fl ID {FF0000}= {FFFFFF}Vergibt 3 Wanteds an ID für Flucht.`n{1E90FF}/fb ID {FF0000}= {FFFFFF}Vergibt 4 Wanteds an ID für Fluchtbeihilfe.`n{1E90FF}/fof ID {FF0000}= {FFFFFF}Vergibt 4 Wanteds an ID für Fahren ohne Führerschein; Flucht.`n{1E90FF}/ans ID {FF0000}= {FFFFFF}Vergibt 12 Wanteds an ID für Anschlag.`n{1E90FF}/einb ID {FF0000}= {FFFFFF}Vergibt 12 Wanteds an ID für (K-B) Einbruch.`n{1E90FF}/bv ID {FF0000}= {FFFFFF}Vergibt 2 Wanteds an ID für Befehlsverweigerung`n{1E90FF}/wtc ID {FF0000}= {FFFFFF}Cleart die Wanteds von ID mit der Begründung: WT-Sit.`n{1E90FF}/t ID {FF0000}= {FFFFFF}Schreibt im Chatfenster '/ticket ID' vor.`n{1E90FF}/gf ID {FF0000}= {FFFFFF}Vergibt 6 Punkte an ID für Geisterfahrt.`n{1E90FF}/vm ID {FF0000}= {FFFFFF}Vergibt 3 Punkte an ID für Vorfahrtsmissachtung.`n`n{1E90FF}/getw {FF0000}= {FFFFFF}Nimmt die Waffen aus dem Inventar. (Fraktionsbezogene)`n{1E90FF}/gsr [Anzahl der Drogen] {FF0000}= {FFFFFF}Rechnet die Geldstrafe für Drogenbesitz aus.`n{1E90FF}/knd [Wantedanzahl] {FF0000}= {FFFFFF}Rechnet die Knastdauer aus.`n{1E90FF}/sfr {FF0000}= {FFFFFF}Öffnet die Sonderfahrzeugregelungen in einem Dialog. (Ingame)`n{1E90FF}/defuse {FF0000}= {FFFFFF}/entschaerfen, nur abgekürzter.`n{1E90FF}/sfreset {FF0000}= {FFFFFF}Setzt die Staatsfraktionsauswahl zurück.`n`n`n --- Sonstige Befehle ---`n`n{1E90FF}/bj {FF0000}= {FFFFFF}Blowjob starten.`n{1E90FF}/anime {FF0000}= {FFFFFF}Animation beenden.`n{1E90FF}/kit {FF0000}= {FFFFFF}Fahrzeug Notfallkit nutzen.`n{1E90FF}/feuer {FF0000}= {FFFFFF}Feuer melden.`n{1E90FF}/csala {FF0000}= {FFFFFF}Falschparker melden oder SALA für Konfiszierung rufen.`.`n{1E90FF}/csani {FF0000}= {FFFFFF}Sanitäter rufen.`n{1E90FF}/esani {FF0000}= {FFFFFF}Sanitäter-Ruf abbrechen.`n{1E90FF}/rlotto {FF0000}= {FFFFFF}Lottoticket mit einer Randomzahl ausfüllen`n{1E90FF}/resms {FF0000}= {FFFFFF}Auf SMS antworten.`n{1E90FF}/ssms <name/id> {FF0000}= {FFFFFF}SMS versenden.`n{1E90FF}/call <name/id> {FF0000}= {FFFFFF}Jemanden anrufen.`n{1E90FF}/acall {FF0000}= {FFFFFF}Anruf annehmen mit tagesabhänginger begrüßung.`n{1E90FF}/ecall {FF0000}= {FFFFFF}Anruf Beenden mit tagesabhängiger verabschiedung.`n{1E90FF}/arb {FF0000}= {FFFFFF}Anrufbeantowrter-Einstellungen vornehmen.`n`n{1E90FF}/ovpos {FF0000}= {FFFFFF}Overlay- Position und Größe verändern`n{1E90FF}/ovsave {FF0000}= {FFFFFF}Overlayveränderungen mittels '/ovpos' speichern. ", "Schließen")
+ShowDialog(0, SFK_C "Keybinder Befehle", "{FFFFFF} --- Staatsfraktionsbefehle ---`n`n{1E90FF}/att ID {FF0000}= {FFFFFF}Vergibt 4 Wanteds an ID für Attack.`n{1E90FF}/mo ID {FF0000}= {FFFFFF}Vergibt 7 Wanteds an ID für Mord.`n{1E90FF}/fl ID {FF0000}= {FFFFFF}Vergibt 3 Wanteds an ID für Flucht.`n{1E90FF}/fb ID {FF0000}= {FFFFFF}Vergibt 4 Wanteds an ID für Fluchtbeihilfe.`n{1E90FF}/fof ID {FF0000}= {FFFFFF}Vergibt 4 Wanteds an ID für Fahren ohne Führerschein; Flucht.`n{1E90FF}/ans ID {FF0000}= {FFFFFF}Vergibt 12 Wanteds an ID für Anschlag.`n{1E90FF}/einb ID {FF0000}= {FFFFFF}Vergibt 12 Wanteds an ID für (K-B) Einbruch.`n{1E90FF}/bv ID {FF0000}= {FFFFFF}Vergibt 2 Wanteds an ID für Befehlsverweigerung`n{1E90FF}/wtc ID {FF0000}= {FFFFFF}Cleart die Wanteds von ID mit der Begründung: WT-Sit.`n{1E90FF}/t ID {FF0000}= {FFFFFF}Schreibt im Chatfenster '/ticket ID' vor.`n{1E90FF}/gf ID {FF0000}= {FFFFFF}Vergibt 6 Punkte an ID für Geisterfahrt.`n{1E90FF}/vm ID {FF0000}= {FFFFFF}Vergibt 3 Punkte an ID für Vorfahrtsmissachtung.`n`n{1E90FF}/getw {FF0000}= {FFFFFF}Nimmt die Waffen aus dem Inventar. (Fraktionsbezogene)`n{1E90FF}/gsr [Anzahl der Drogen] {FF0000}= {FFFFFF}Rechnet die Geldstrafe für Drogenbesitz aus.`n{1E90FF}/knd [Wantedanzahl] {FF0000}= {FFFFFF}Rechnet die Knastdauer aus.`n{1E90FF}/sfr {FF0000}= {FFFFFF}Öffnet die Sonderfahrzeugregelungen in einem Dialog. (Ingame)`n{1E90FF}/defuse {FF0000}= {FFFFFF}/entschaerfen, nur abgekürzter.`n{1E90FF}/sfreset {FF0000}= {FFFFFF}Setzt die Staatsfraktionsauswahl zurück.`n`n`n --- Sonstige Befehle ---`n`n{1E90FF}/bj {FF0000}= {FFFFFF}Blowjob starten.`n{1E90FF}/anime {FF0000}= {FFFFFF}Animation beenden.`n{1E90FF}/kit {FF0000}= {FFFFFF}Fahrzeug Notfallkit nutzen.`n{1E90FF}/feuer {FF0000}= {FFFFFF}Feuer melden.`n{1E90FF}/csala {FF0000}= {FFFFFF}Falschparker melden oder SALA für Konfiszierung rufen.`.`n{1E90FF}/csani {FF0000}= {FFFFFF}Sanitäter rufen.`n{1E90FF}/esani {FF0000}= {FFFFFF}Sanitäter-Ruf abbrechen.`n{1E90FF}/rlotto {FF0000}= {FFFFFF}Lottoticket mit einer Randomzahl ausfüllen`n{1E90FF}/resms {FF0000}= {FFFFFF}Auf SMS antworten.`n{1E90FF}/ssms <name/id> {FF0000}= {FFFFFF}SMS versenden.`n{1E90FF}/call <name/id> {FF0000}= {FFFFFF}Jemanden anrufen.`n{1E90FF}/acall {FF0000}= {FFFFFF}Anruf annehmen mit tagesabhänginger begrüßung.`n{1E90FF}/ecall {FF0000}= {FFFFFF}Anruf Beenden mit tagesabhängiger verabschiedung.`n{1E90FF}/arb {FF0000}= {FFFFFF}Anrufbeantworter-Einstellungen vornehmen.`n{1E90FF}/relog [Password] {FF0000}= {FFFFFF}Reloggen (Passwort optional)`n`n{1E90FF}/ovpos {FF0000}= {FFFFFF}Overlay- Position und Größe verändern`n{1E90FF}/ovsave {FF0000}= {FFFFFF}Overlayveränderungen mittels '/ovpos' speichern. ", "Schließen")
 return
 :?:/rlotto::
 Random, Lottozahl, 1, 80
@@ -6002,6 +6037,27 @@ SendInput, {Enter}
 return
 :?:/kit::
 SendChat("/item 128 1")
+return
+:?b0:/relog::
+Suspend, Permit
+RegRead, GTA, HKEY_CURRENT_USER, Software\SAMP, gta_sa_exe
+samp_dir := StrReplace(GTA, "gta_sa.exe", "samp.exe")
+myname := GetPlayerName()
+ServerIP := getServerIP()
+ServerPort := getServerPort()
+Input, ServerPW, V I M, {enter}
+If(StrLen(ServerPW) >= 1)
+{
+SendInput {enter}t/q{enter}
+Sleep, 2000
+Run %samp_dir% %ServerIP%:%ServerPort% -n%myname%-z%ServerPW%
+}
+else if(StrLen(ServerPW) = 0)
+{
+SendInput {enter}t/q{enter}
+Sleep, 2000
+Run %samp_dir% %ServerIP%:%ServerPort% -n%myname%
+}
 return
 :?:t/ovpos::
 if(ov_move == false && Overlay == 1)
